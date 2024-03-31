@@ -1,12 +1,12 @@
-interface ButtonProps {
-  css?: string
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  className?: string
   children: React.ReactNode
 }
 
-const Button = ({ css, children, ...props }: ButtonProps) => {
+const Button = ({ className, children, ...props }: ButtonProps) => {
   return (
     <button
-      className={`p-2 bg-toast-blue rounded-md text-white font-bold ${css}`}
+      className={`p-2 bg-toast-blue rounded-md text-white ${className}`}
       {...props}
     >
       {children}

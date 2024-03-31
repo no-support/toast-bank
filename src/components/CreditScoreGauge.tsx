@@ -54,7 +54,7 @@ function CreditScoreGauge({
           strokeDashoffset={dashoffset}
         ></path>
       </svg>
-      <span className="font-bold absolute bottom-1/4 -translate-x-1/2 left-1/2 text-lg">
+      <span className="font-semibold absolute bottom-1/4 -translate-x-1/2 left-1/2 text-lg">
         {score === 0 ? '???' : addDelimiter(score)}
       </span>
     </div>

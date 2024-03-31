@@ -10,7 +10,13 @@ const Layout = () => {
         </Link>
       </div>
       <div>
-        <Button>로그인/회원가입</Button>
+        {/* <Button onClick={() => { } }>로그인/회원가입</Button> */}
+        <Link
+          href={'/signin'}
+          className="p-2 bg-toast-blue rounded-md text-white "
+        >
+          로그인/회원가입
+        </Link>
       </div>
     </nav>
   )

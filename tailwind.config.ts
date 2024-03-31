@@ -15,6 +15,7 @@ const config: Config = {
       },
       colors: {
         'toast-blue': '#3182f6',
+        'toast-blue-disabled': '#2196f3',
       },
     },
   },
