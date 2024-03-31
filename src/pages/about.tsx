@@ -1,20 +1,12 @@
-import Image from 'next/image'
+import Map from '@/components/Map'
 
 const About = () => {
   return (
-    <div className="p-3 w-full">
-      <div className="header font-semibold h-10 flex justify-start items-center">
+    <div className="p-3 space-y-2">
+      <div className="title font-semibold flex justify-start items-center">
         기본 정보
       </div>
-      <div className="map  ">
-        {/* <img
-          src="http://via.placeholder.com/320x240"
-          alt="tempImage"
-          className="  rounded-lg"
-        /> */}
-        <div className="h-96 bg-gray-300 rounded-lg"></div>
-      </div>
-      <div className="h-4  "></div>
+      <Map />
       <table className="w-full">
         <tbody className="text-center">
           <tr className="address h-10 ">
