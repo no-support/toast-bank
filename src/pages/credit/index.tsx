@@ -1,9 +1,9 @@
-import Button from '@/components/Button'
 import CreditScoreGauge from '@/components/CreditScoreGauge'
 import Modal from '@/components/Modal'
 import { useState } from 'react'
 
-const Grade = () => {
+const Credit = () => {
+  // TODO: 신용 조회가 완료되었으면 점수를 게이지에 보여줄 것
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const openModal = () => {
     setIsModalOpen(true)
@@ -36,9 +36,12 @@ const Grade = () => {
       </div>
 
       <div className="retrieve-section">
-        <Button className="w-full" onClick={openModal}>
+        <button
+          className="w-[calc(100%-1.5rem)] absolute bottom-3"
+          onClick={openModal}
+        >
           30초 만에 신용 점수 조회하기
-        </Button>
+        </button>
         <Modal
           isOpen={isModalOpen}
           onClose={closeModal}
@@ -52,4 +55,4 @@ const Grade = () => {
   )
 }
 
-export default Grade
+export default Credit

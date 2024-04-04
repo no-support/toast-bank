@@ -22,7 +22,6 @@ const Signup = () => {
           <input
             placeholder="user1@email.com"
             {...register('email', { required: true })}
-            className="px-4 h-12 border border-gray-300 rounded-md w-full box-border"
           />
 
           <div className="h-8">
@@ -39,10 +38,7 @@ const Signup = () => {
           <label htmlFor="pw" className="text-sm mb-1.5">
             패스워드
           </label>
-          <input
-            {...register('pw', { required: true })}
-            className="px-4 h-12 border border-gray-300 rounded-md w-full box-border"
-          />
+          <input {...register('pw', { required: true })} />
           <div className="h-8">
             {errors.pw && (
               <span className="text-xs text-red-600">
@@ -57,10 +53,7 @@ const Signup = () => {
           <label htmlFor="pwCheck" className="text-sm mb-1.5">
             패스워드 확인
           </label>
-          <input
-            {...register('pwCheck', { required: true })}
-            className="px-4 h-12 border border-gray-300 rounded-md w-full box-border"
-          />
+          <input {...register('pwCheck', { required: true })} />
           <div className="h-8">
             {errors.pwCheck && (
               <span className="text-xs text-red-600">
@@ -75,10 +68,7 @@ const Signup = () => {
           <label htmlFor="name" className="text-sm mb-1.5">
             이름
           </label>
-          <input
-            {...register('name', { required: true })}
-            className="px-4 h-12 border border-gray-300 rounded-md w-full box-border"
-          />
+          <input {...register('name', { required: true })} />
           <div className="h-8">
             {errors.name && (
               <span className="text-xs text-red-600">

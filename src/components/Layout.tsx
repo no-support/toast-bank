@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import Button from './Button'
 
 const Layout = () => {
   return (
@@ -10,7 +9,6 @@ const Layout = () => {
         </Link>
       </div>
       <div>
-        {/* <Button onClick={() => { } }>로그인/회원가입</Button> */}
         <Link
           href={'/signin'}
           className="p-2 bg-toast-blue rounded-md text-white "

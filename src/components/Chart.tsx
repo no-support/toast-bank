@@ -8,9 +8,11 @@ import ParentSize from '@visx/responsive/lib/components/ParentSize'
 import { AxisBottom } from '@visx/axis'
 import { useTooltip, TooltipWithBounds } from '@visx/tooltip'
 
+import { mainColor } from '@/utils/constant'
+
 // 월별 데이터
-// 날짜: 월별 마지막일자
-// 잔고: 월별 마지막일자의 잔고
+// 날짜: 월별 마지막 일자
+// 잔고: 월별 마지막 일자의 잔고
 
 interface ChartData {
   // x
@@ -25,7 +27,6 @@ interface ChartProps {
   height: number
 }
 
-const mainColor = '#3182f6'
 const verticalMargin = 120
 
 const getX = (d: ChartData) => d.date

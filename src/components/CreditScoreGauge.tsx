@@ -1,5 +1,6 @@
 import addDelimiter from '@/utils/addDelimiter'
 import { useRef, useEffect, useState } from 'react'
+import { mainColor } from '@/utils/constant'
 
 const MAX_CREDIT_SCORE = 1000
 
@@ -45,7 +46,7 @@ function CreditScoreGauge({
         {/* 파란색 경로 */}
         <path
           d="M18.421 154C12.3741 140.971 9 126.458 9 111.159C9 54.7382 54.8908 9 111.5 9C168.109 9 214 54.7382 214 111.159C214 126.458 210.626 140.971 204.579 154"
-          stroke="#3182f6"
+          stroke={mainColor}
           strokeWidth="18"
           strokeLinecap="round"
           // 전체 길이

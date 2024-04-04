@@ -20,11 +20,7 @@ const Signin = () => {
           <label htmlFor="email" className="text-sm mb-1.5">
             이메일
           </label>
-          <input
-            placeholder="user1@email.com"
-            {...register('email')}
-            className="px-4 h-12 border border-gray-300 rounded-md w-full box-border"
-          />
+          <input placeholder="user1@email.com" {...register('email')} />
           {errors.email && <span></span>}
         </div>
 
@@ -35,10 +31,7 @@ const Signin = () => {
           <label htmlFor="pw" className="text-sm mb-1.5">
             패스워드
           </label>
-          <input
-            {...register('pw', { required: true })}
-            className="px-4 h-12 border border-gray-300 rounded-md w-full box-border"
-          />
+          <input {...register('pw', { required: true })} />
           {errors.pw && <span></span>}
         </div>
         <div className="h-8"></div>

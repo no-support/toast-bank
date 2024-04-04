@@ -1,4 +1,5 @@
 import Chart from '@/components/Chart'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 const chartData = [
@@ -47,7 +48,7 @@ const Asset = () => {
       <div className="history">
         <div className="font-semibold my-3">입출금 내역</div>
 
-        <ul className="space-y-2">
+        <ul>
           {[...Array(5)].map((item, idx) => (
             <div className="flex flex-row justify-between" key={idx}>
               <div className="title">
@@ -62,14 +63,12 @@ const Asset = () => {
           ))}
         </ul>
 
-        <button
-          className="bg-white border border-toast-blue w-full h-12 my-3"
-          onClick={() => {
-            router.push('/account')
-          }}
+        <Link
+          className="bg-white border border-toast-blue w-full h-12 my-3 flex justify-center items-center"
+          href={'/account'}
         >
           자세히 보기
-        </button>
+        </Link>
       </div>
     </div>
   )

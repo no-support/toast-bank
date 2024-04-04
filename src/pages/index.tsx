@@ -1,4 +1,3 @@
-import Button from '@/components/Button'
 import Container from '@/components/Container'
 import CreditScoreGauge from '@/components/CreditScoreGauge'
 import Footer from '@/components/Footer'
@@ -18,13 +17,12 @@ const Home = () => {
               <span className="text-gray-500">홍길동 회원님의 자산</span>
               <span className="font-semibold text-lg">127,000원</span>
             </div>
-            <Button
-              onClick={() => {
-                router.push('/asset')
-              }}
+            <Link
+              href={'/asset'}
+              className="p-2 bg-toast-blue rounded-md text-white "
             >
               분석
-            </Button>
+            </Link>
           </Container>
         )}
         {/* 신용 점수 */}
@@ -35,9 +33,8 @@ const Home = () => {
               <br />
               점수를 올리세요
             </span>
-            {/* <Button>내 신용 점수 보러 가기</Button> */}
             <Link
-              href={'/grade'}
+              href={'/credit'}
               className="p-2 bg-toast-blue rounded-md text-white "
             >
               내 신용 점수 보러 가기
@@ -60,7 +57,7 @@ const Home = () => {
                 <li key={idx}>
                   <div className="item h-16 flex justify-between items-center">
                     <div className="flex flex-col justify-around">
-                      <span className="font-semibold">1위</span>
+                      <span className="font-semibold">{`${idx + 1}`}위</span>
                       <span>KB국민 My WE:SH 카드</span>
                     </div>
                     <div className="flex justify-center items-center">
@@ -82,14 +79,12 @@ const Home = () => {
             </ul>
           </div>
           {/* 추천 카드 더보기 */}
-          <button
-            className="bg-white border border-toast-blue w-full h-12 my-3"
-            onClick={() => {
-              router.push('/cards')
-            }}
+          <Link
+            className="bg-white border border-toast-blue w-full h-12 my-3 flex justify-center items-center"
+            href={'/cards'}
           >
             더 보기
-          </button>
+          </Link>
         </div>
         {/* 회사 소개 */}
       </div>

@@ -1,4 +1,3 @@
-import Button from '@/components/Button'
 import { FiCheckCircle } from 'react-icons/fi'
 import { motion } from 'framer-motion'
 const Card = () => {
@@ -10,7 +9,7 @@ const Card = () => {
       </div>
 
       <div className="contents-section">
-        <ul className="benefit-list my-6 space-y-2">
+        <ul className="benefit-list my-6">
           {[...Array(5)].map((item, idx) => (
             <motion.li
               className="flex gap-2 "
@@ -52,7 +51,7 @@ const Card = () => {
         </div>
 
         <div className="apply-section">
-          <Button className="w-full">1분 만에 신청하고 혜택받기</Button>
+          <button className="w-full">1분 만에 신청하고 혜택받기</button>
         </div>
       </div>
     </div>

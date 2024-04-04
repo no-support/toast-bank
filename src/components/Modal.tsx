@@ -14,12 +14,12 @@ const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
       <div className="bg-white p-6 rounded shadow-lg z-50 relative w-80 ">
         <p className="text-lg font-semibold pb-3">{title}</p>
         <p className="pb-8 break-keep">{content}</p>
-        <button
-          className="text-toast-blue absolute bottom-0 right-0 mb-6 mr-6"
+        <span
+          className="text-toast-blue absolute bottom-0 right-0 mb-6 mr-6 cursor-pointer"
           onClick={onClose}
         >
           확인
-        </button>
+        </span>
       </div>
     </div>
   )

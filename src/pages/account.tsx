@@ -3,12 +3,12 @@ const Account = () => {
     <div className="p-3">
       <div className="history">
         <div className="my-3 text-right font-semibold space-x-2">
-          <button>전체</button>
-          <button>입금</button>
-          <button>출금</button>
+          <span>전체</span>
+          <span>입금</span>
+          <span>출금</span>
         </div>
 
-        <ul className="space-y-2">
+        <ul>
           {[...Array(5)].map((item, idx) => (
             <div className="flex flex-row justify-between " key={idx}>
               <div className="title">
