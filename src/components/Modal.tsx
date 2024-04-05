@@ -15,7 +15,7 @@ const Modal = ({ isOpen, onClose, title, content }: ModalProps) => {
         <p className="text-lg font-semibold pb-3">{title}</p>
         <p className="pb-8 break-keep">{content}</p>
         <span
-          className="text-toast-blue absolute bottom-0 right-0 mb-6 mr-6 cursor-pointer"
+          className="text-primary-color absolute bottom-0 right-0 mb-6 mr-6 cursor-pointer"
           onClick={onClose}
         >
           확인

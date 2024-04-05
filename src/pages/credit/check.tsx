@@ -1,16 +1,15 @@
 import PageLoader from '@/components/PageLoader'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import Confetti from 'react-confetti-boom'
 
 const Check = () => {
-  // TODO: 조회가 완료되었을 때의 이미지를 로켓이 아닌 다른 이미지로 바꾸자..
   const [pending, setPending] = useState(5)
   const router = useRouter()
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (pending > 0) {
-        console.log('check.tsx - pending: ', pending)
         setPending(pending - 1)
       } else {
         // TODO: 신용 정보 createOrUpdate
@@ -27,8 +26,15 @@ const Check = () => {
           <PageLoader message="쏜살같이 신용 정보를 조회 중이에요!"></PageLoader>
         </>
       ) : (
-        <div>
-          <PageLoader message="조회가 완료되었어요!"></PageLoader>
+        <div className="flex h-[calc(100vh-3rem)] justify-center items-center">
+          <Confetti
+            mode="boom"
+            particleCount={300}
+            spreadDeg={50}
+            effectCount={Infinity}
+            launchSpeed={3}
+          />
+          <p>조회가 완료되었어요!</p>
           <button
             className="w-[calc(100%-1.5rem)] absolute bottom-3"
             onClick={() => {

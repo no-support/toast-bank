@@ -1,3 +1,5 @@
+import { transaction_list } from '@/mock/transaction'
+
 const Account = () => {
   return (
     <div className="p-3">
@@ -9,15 +11,15 @@ const Account = () => {
         </div>
 
         <ul>
-          {[...Array(5)].map((item, idx) => (
+          {transaction_list.map((transaction, idx) => (
             <div className="flex flex-row justify-between " key={idx}>
               <div className="title">
-                <p className="font-semibold">홍길동</p>
-                <p>2024-03-01 22:10:11</p>
+                <p className="font-semibold">{transaction.displayText}</p>
+                <p className="text-sm">{transaction.date}</p>
               </div>
-              <div className="content">
-                <p className="text-toast-blue">+12,000원</p>
-                <p className="text-red-400">126,000원</p>
+              <div className="content flex flex-col items-end">
+                <p className="text-red-400">+{transaction.amount}원</p>
+                <p className="">{transaction.amount}원</p>
               </div>
             </div>
           ))}

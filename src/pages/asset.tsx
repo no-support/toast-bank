@@ -56,15 +56,15 @@ const Asset = () => {
                 <p>2024-03-01 22:10:11</p>
               </div>
               <div className="content">
-                <p className="text-toast-blue">+12,000원</p>
-                <p className="text-red-400">126,000원</p>
+                <p className="text-primary-color">+12,000원</p>
+                <p className="">126,000원</p>
               </div>
             </div>
           ))}
         </ul>
 
         <Link
-          className="bg-white border border-toast-blue w-full h-12 my-3 flex justify-center items-center"
+          className="bg-white border border-primary-color w-full h-12 my-3 flex justify-center items-center"
           href={'/account'}
         >
           자세히 보기

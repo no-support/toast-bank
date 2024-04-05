@@ -19,7 +19,7 @@ const Home = () => {
             </div>
             <Link
               href={'/asset'}
-              className="p-2 bg-toast-blue rounded-md text-white "
+              className="p-2 bg-primary-color rounded-md text-white "
             >
               분석
             </Link>
@@ -35,7 +35,7 @@ const Home = () => {
             </span>
             <Link
               href={'/credit'}
-              className="p-2 bg-toast-blue rounded-md text-white "
+              className="p-2 bg-primary-color rounded-md text-white "
             >
               내 신용 점수 보러 가기
             </Link>
@@ -62,7 +62,7 @@ const Home = () => {
                     </div>
                     <div className="flex justify-center items-center">
                       {true && (
-                        <span className="bg-red text-white px-2 py-1 text-center rounded-full block bg-toast-blue">
+                        <span className="bg-red text-white px-2 py-1 text-center rounded-full block bg-primary-color">
                           30만 원 증정
                         </span>
                       )}
@@ -80,7 +80,7 @@ const Home = () => {
           </div>
           {/* 추천 카드 더보기 */}
           <Link
-            className="bg-white border border-toast-blue w-full h-12 my-3 flex justify-center items-center"
+            className="bg-white border border-primary-color w-full h-12 my-3 flex justify-center items-center"
             href={'/cards'}
           >
             더 보기

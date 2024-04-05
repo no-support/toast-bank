@@ -1,3 +1,4 @@
+// for test
 import { memo } from 'react'
 
 let arr: number[] = []
@@ -6,8 +7,6 @@ for (let i = 0; i < 10000; i++) {
   arr.push(i)
 }
 const List = ({ keyword = '' }: { keyword: string }) => {
-  console.log(keyword)
-
   const filteredList = arr.filter((item) => String(item).includes(keyword))
 
   return (

@@ -1,11 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
-/* eslint-disable react/jsx-no-comment-textnodes */
+import Image from 'next/image'
+
 function PageLoader({ message }: { message?: string }) {
   return (
-    <div className="flex fixed inset-0 justify-center items-center">
+    <div className="flex h-[calc(100vh-3rem)] justify-center items-center">
       <div className="flex flex-col items-center">
-        <img
+        <Image
           width={120}
+          height={120}
           src="https://cdn.pixabay.com/animation/2023/06/13/15/12/15-12-47-323_512.gif"
           alt="로딩 이미지"
         />

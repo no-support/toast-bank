@@ -25,7 +25,7 @@ const Card = () => {
                 translateX: 0,
               }}
             >
-              <FiCheckCircle className="text-toast-blue" size={40} />
+              <FiCheckCircle className="bg-primary-color" size={40} />
               <div className="flex flex-col">
                 <span className="font-semibold">혜택1</span>
                 <span className="text-sm">마트/편의점 10% 할인</span>
