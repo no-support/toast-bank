@@ -1,12 +1,11 @@
-import { faq_list } from '@/mock/faq'
+import { Faq } from '@/interface/faq'
+import axios from 'axios'
 
-type faq = (typeof faq_list)[number]
-
-const Faq = ({ faq_list }: { faq_list: faq[] }) => {
+const FaqPage = ({ faqs }: { faqs: Faq[] }) => {
   return (
     <div className="p-3 space-y-2">
       <ol>
-        {faq_list.map((faq, idx) => (
+        {faqs.map((faq, idx) => (
           <li key={idx} className="m-6 ">
             <details
               className="open:bg-white dark:open:bg-slate-900 open:ring-1 open:ring-black/5 dark:open:ring-white/10 open:shadow-lg p-6 rounded-lg"
@@ -27,8 +26,13 @@ const Faq = ({ faq_list }: { faq_list: faq[] }) => {
 }
 
 export async function getStaticProps() {
+  // const faq_list = await fetch(
+  //   `${process.env.NEXT_PUBLIC_API_URL}/api/faq`,
+  // ).then((res) => res.json())
+
+  const faqs = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`)
   return {
-    props: { faq_list },
+    props: { faqs: faqs.data },
   }
 }
-export default Faq
+export default FaqPage
