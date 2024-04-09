@@ -1,12 +1,20 @@
+import Badge from '@/components/Badge'
 import Container from '@/components/Container'
 import CreditScoreGauge from '@/components/CreditScoreGauge'
 import Footer from '@/components/Footer'
+import { Card } from '@/interface/card'
+import { getCardRanking } from '@/remote/card'
+import { GetServerSidePropsContext } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FaAngleRight } from 'react-icons/fa'
-const Home = () => {
-  const router = useRouter()
 
+interface HomePageProps {
+  cards: Card[]
+}
+
+const Home = ({ cards }: HomePageProps) => {
+  const router = useRouter()
   return (
     <>
       <div className="p-3">
@@ -53,25 +61,21 @@ const Home = () => {
           {/* 추천 카드 콘텐츠 */}
           <div className="contents-section">
             <ul>
-              {[...Array(5)].map((item, idx) => (
+              {cards.map((card, idx) => (
                 <li key={idx}>
-                  <div className="item h-16 flex justify-between items-center">
+                  <div
+                    className="item h-16 flex justify-between items-center cursor-pointer"
+                    onClick={() => {
+                      router.push(`/cards/${card.id}`)
+                    }}
+                  >
                     <div className="flex flex-col justify-around">
-                      <span className="font-semibold">{`${idx + 1}`}위</span>
-                      <span>KB국민 My WE:SH 카드</span>
+                      <span className="font-semibold">{`${card.id}`}위</span>
+                      <span>{card.name}</span>
                     </div>
                     <div className="flex justify-center items-center">
-                      {true && (
-                        <span className="bg-red text-white px-2 py-1 text-center rounded-full block bg-primary-color">
-                          30만 원 증정
-                        </span>
-                      )}
-                      <FaAngleRight
-                        className="w-6 h-6 cursor-pointer"
-                        onClick={() => {
-                          router.push(`/cards/${idx}`)
-                        }}
-                      />
+                      {card.payback && <Badge text={`${card.payback}`} />}
+                      <FaAngleRight className="w-6 h-6" />
                     </div>
                   </div>
                 </li>
@@ -86,11 +90,18 @@ const Home = () => {
             더 보기
           </Link>
         </div>
-        {/* 회사 소개 */}
       </div>
       <Footer />
     </>
   )
 }
 
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  const cards = await getCardRanking()
+  return {
+    props: { cards: cards },
+  }
+}
 export default Home

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { useRef, useEffect, useState, useCallback, ChangeEvent } from 'react'
 import { useQuery } from '@tanstack/react-query'
 
-import { getSearchCards } from '@/pages/api/card'
+import { getSearchCards } from '@/remote/card'
 
 import useDebounce from '@/hooks/useDebounce'
 import Top from '@/components/Top'
@@ -47,23 +47,20 @@ const Search = () => {
       ) : (
         <ul>
           {data?.map((card, idx) => (
-            <li
-              // TODO: card.id로 변경
-              key={idx}
-            >
-              <div className="item h-16 flex justify-between items-center">
+            <li key={card.id}>
+              <div
+                className="item h-16 flex justify-between items-center cursor-pointer"
+                onClick={() => {
+                  router.push(`/cards/${card.id}`)
+                }}
+              >
                 <div className="flex flex-col justify-around">
-                  <span className="font-semibold">{`${idx + 1}`}위</span>
+                  <span className="font-semibold">{`${card.id}`}위</span>
                   <span>{card.name}</span>
                 </div>
                 <div className="flex justify-center items-center">
                   {card.payback && <Badge text={`${card.payback}`} />}
-                  <FaAngleRight
-                    className="w-6 h-6 cursor-pointer"
-                    onClick={() => {
-                      router.push(`/cards/${idx}`)
-                    }}
-                  />
+                  <FaAngleRight className="w-6 h-6" />
                 </div>
               </div>
             </li>
