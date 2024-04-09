@@ -1,5 +1,6 @@
 import { Faq } from '@/interface/faq'
 import axios from 'axios'
+import { revalidateTag } from 'next/cache'
 
 const FaqPage = ({ faqs }: { faqs: Faq[] }) => {
   return (
@@ -26,13 +27,10 @@ const FaqPage = ({ faqs }: { faqs: Faq[] }) => {
 }
 
 export async function getStaticProps() {
-  // const faq_list = await fetch(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/api/faq`,
-  // ).then((res) => res.json())
-
   const faqs = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`)
   return {
     props: { faqs: faqs.data },
+    revalidate: 60 * 60 * 24, // 24시간
   }
 }
 export default FaqPage
