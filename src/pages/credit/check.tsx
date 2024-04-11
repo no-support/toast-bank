@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-confetti-boom'
 
-const Check = () => {
+const CheckPage = () => {
   const [pending, setPending] = useState(5)
   const router = useRouter()
 
@@ -53,4 +53,4 @@ function getCreditScore(min: number = 200, max: number = 1000) {
   return Math.floor(Math.random() * (max - min + 1)) + min
 }
 
-export default Check
+export default CheckPage

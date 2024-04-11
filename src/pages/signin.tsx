@@ -1,32 +1,45 @@
+import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
+import { getCsrfToken, signIn, useSession } from 'next-auth/react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
-const Signin = () => {
+
+const SignInPage = ({
+  csrfToken,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  const router = useRouter()
+
+  const { status } = useSession()
+  if (status === 'authenticated') {
+    router.push('/')
+  }
+
   const {
     register,
     handleSubmit,
     formState: { errors, isDirty, isValid },
   } = useForm<Inputs>()
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    // TODO 로그인 작업
-    console.log('signin.tsx - data: ', data)
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     try {
-      throw new Error()
-    } catch {
-      toast.error('입력값을 확인해주세요.')
+      const res = await signIn('credentials', { redirect: false }, formData)
+      if (res?.error) throw new Error(res.error)
+    } catch (e) {
+      toast.error('이메일과 비밀번호를 확인해주세요.')
     }
   }
 
   return (
     <div className="flex flex-col p-6">
       <form onSubmit={handleSubmit(onSubmit)}>
+        <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         {/* 이메일 */}
         <div className="flex flex-col">
           <label htmlFor="email" className="text-sm mb-1.5">
             이메일
           </label>
           <input
+            id="email"
             placeholder="user1@email.com"
             {...register('email', {
               required: true,
@@ -40,12 +53,14 @@ const Signin = () => {
 
         {/* 패스워드 */}
         <div className="flex flex-col">
-          <label htmlFor="pw" className="text-sm mb-1.5">
+          <label htmlFor="password" className="text-sm mb-1.5">
             패스워드
           </label>
           <input
-            {...register('pw', { required: true, minLength: 8 })}
-            className={errors.pw && 'border-red-500'}
+            id="password"
+            type="password"
+            {...register('password', { required: true, minLength: 8 })}
+            className={errors.password && 'border-red-500'}
           />
         </div>
         <div className="h-8"></div>
@@ -67,10 +82,16 @@ const Signin = () => {
     </div>
   )
 }
-
-export default Signin
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  return {
+    props: {
+      csrfToken: await getCsrfToken(context),
+    },
+  }
+}
+export default SignInPage
 
 type Inputs = {
   email: string
-  pw: string
+  password: string
 }

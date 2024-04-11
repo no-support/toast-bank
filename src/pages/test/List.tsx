@@ -1,4 +1,3 @@
-// for test
 import { memo } from 'react'
 
 let arr: number[] = []

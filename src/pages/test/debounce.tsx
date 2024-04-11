@@ -3,7 +3,7 @@ import useDebounce from '@/hooks/useDebounce'
 
 const TestDebounce = () => {
   const [inputValue, setInputValue] = useState('')
-  const debouncedValue = useDebounce(inputValue, 500) // 500밀리초(0.5초) 후에 업데이트
+  const debouncedValue = useDebounce(inputValue, 500)
 
   return (
     <div>

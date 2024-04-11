@@ -1,4 +1,4 @@
-export default function Custom404() {
+export default function _404Page() {
   return (
     <div className="flex justify-center items-center absolute top-12 left-0 right-0 bottom-0">
       <div className="p-3 text-center">

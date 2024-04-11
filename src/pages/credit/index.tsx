@@ -2,7 +2,7 @@ import CreditScoreGauge from '@/components/CreditScoreGauge'
 import Modal from '@/components/Modal'
 import { useState } from 'react'
 
-const Credit = () => {
+const CreditPage = () => {
   // TODO: 신용 조회가 완료되었으면 점수를 게이지에 보여줄 것
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const openModal = () => {
@@ -55,4 +55,4 @@ const Credit = () => {
   )
 }
 
-export default Credit
+export default CreditPage

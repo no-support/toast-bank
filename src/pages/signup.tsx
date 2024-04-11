@@ -3,8 +3,11 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { toast } from 'react-toastify'
 import { FaEye } from 'react-icons/fa'
 import { FaEyeSlash } from 'react-icons/fa'
+import axios from 'axios'
+import { useRouter } from 'next/navigation'
 
-const Signup = () => {
+const SignUpPage = () => {
+  const router = useRouter()
   const {
     register,
     handleSubmit,
@@ -14,17 +17,16 @@ const Signup = () => {
     mode: 'onTouched',
   })
 
-  const [showPw, setShowPw] = useState(false)
-  const [showPwCheck, setShowPwCheck] = useState(false)
+  const [showPassword, setShowPassword] = useState(false)
+  const [showPasswordChk, setShowPasswordChk] = useState(false)
 
-  if (errors) {
-    console.log('signup.tsx - errors: ', errors)
-  }
-
-  const onSubmit: SubmitHandler<Inputs> = (data) => {
-    console.log('signup.tsx - data: ', data)
-    toast.success('성공')
-    toast.error('실패')
+  const onSubmit: SubmitHandler<Inputs> = async (formData) => {
+    try {
+      const { data } = await axios.post('/api/auth/signup', formData)
+      router.push('/congrats')
+    } catch {
+      toast.error('문제가 발생했습니다. 관리자에게 문의해주세요.')
+    }
   }
   return (
     <div className="flex flex-col p-6">
@@ -61,16 +63,16 @@ const Signup = () => {
         {/* 패스워드 */}
         <div className="flex flex-col">
           <label
-            htmlFor="pw"
+            htmlFor="password"
             className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500"
           >
             패스워드
           </label>
           <div className="relative">
             <input
-              id="pw"
-              type={showPw ? 'text' : 'password'}
-              {...register('pw', {
+              id="password"
+              type={showPassword ? 'text' : 'password'}
+              {...register('password', {
                 required: '비밀번호를 입력해주세요',
                 minLength: {
                   value: 8,
@@ -81,14 +83,16 @@ const Signup = () => {
             <button
               type="button"
               className="absolute top-1/2 right-2 transform -translate-y-1/2 focus:outline-none"
-              onClick={() => setShowPw(!showPw)}
+              onClick={() => setShowPassword(!showPassword)}
             >
-              {showPw ? <FaEyeSlash /> : <FaEye />}
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
           <div className="h-8">
-            {errors.pw && (
-              <span className="text-xs text-red-600">{errors.pw.message}</span>
+            {errors.password && (
+              <span className="text-xs text-red-600">
+                {errors.password.message}
+              </span>
             )}
           </div>
         </div>
@@ -96,7 +100,7 @@ const Signup = () => {
         {/* 패스워드 확인 */}
         <div className="flex flex-col">
           <label
-            htmlFor="pwCheck"
+            htmlFor="passwordChk"
             className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500"
           >
             패스워드 확인
@@ -104,28 +108,28 @@ const Signup = () => {
 
           <div className="relative">
             <input
-              id="pwCheck"
-              type={showPwCheck ? 'text' : 'password'}
-              {...register('pwCheck', {
+              id="passwordChk"
+              type={showPasswordChk ? 'text' : 'password'}
+              {...register('passwordChk', {
                 required: '패스워드 확인을 입력해주세요',
                 validate: (value) => {
-                  const { pw } = getValues()
-                  return value === pw || '패스워드가 일치하지 않아요.'
+                  const { password } = getValues()
+                  return value === password || '패스워드가 일치하지 않아요.'
                 },
               })}
             />
             <button
               type="button"
               className="absolute top-1/2 right-2 transform -translate-y-1/2 focus:outline-none"
-              onClick={() => setShowPwCheck(!showPwCheck)}
+              onClick={() => setShowPasswordChk(!showPasswordChk)}
             >
-              {showPwCheck ? <FaEyeSlash /> : <FaEye />}
+              {showPasswordChk ? <FaEyeSlash /> : <FaEye />}
             </button>
           </div>
           <div className="h-8">
-            {errors.pwCheck && (
+            {errors.passwordChk && (
               <span className="text-xs text-red-600">
-                {errors.pwCheck.message}
+                {errors.passwordChk.message}
               </span>
             )}
           </div>
@@ -167,11 +171,11 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default SignUpPage
 
 type Inputs = {
   email: string
-  pw: string
-  pwCheck: string
+  password: string
+  passwordChk: string
   name: string
 }

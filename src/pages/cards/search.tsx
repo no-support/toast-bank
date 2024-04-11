@@ -9,7 +9,7 @@ import Top from '@/components/Top'
 import { FaAngleRight } from 'react-icons/fa'
 import Badge from '@/components/Badge'
 
-const Search = () => {
+const SearchPage = () => {
   const [keyword, setKeyword] = useState('')
   const debouncedKeyword = useDebounce(keyword)
 
@@ -71,4 +71,4 @@ const Search = () => {
   )
 }
 
-export default Search
+export default SearchPage

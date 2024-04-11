@@ -13,7 +13,7 @@ interface HomePageProps {
   cards: Card[]
 }
 
-const Home = ({ cards }: HomePageProps) => {
+const HomePage = ({ cards }: HomePageProps) => {
   const router = useRouter()
   return (
     <>
@@ -104,4 +104,4 @@ export const getServerSideProps = async (
     props: { cards: cards },
   }
 }
-export default Home
+export default HomePage

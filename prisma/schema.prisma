@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -13,11 +7,14 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model User {
-//   id Int @id @default(autoincrement())
-//   email String @unique
-//   name String
-// }
+model User {
+  id          Int           @id @default(autoincrement())
+  email       String        @unique
+  password    String
+  name        String
+  Credit      Credit?
+  Transaction Transaction[]
+}
 
 model Faq {
   id       Int    @id @default(autoincrement())
@@ -34,4 +31,22 @@ model Card {
   promotionTitle String?
   promotionTerms String?
   payback        String?
+}
+
+model Transaction {
+  id          Int      @id @default(autoincrement())
+  email       String   @map("userId")
+  type        String
+  date        DateTime
+  displayText String
+  amount      Int
+  balance     Int
+  user        User     @relation(fields: [email], references: [email])
+}
+
+model Credit {
+  id    Int    @id @default(autoincrement())
+  email String @unique
+  score Int
+  user  User   @relation(fields: [email], references: [email])
 }

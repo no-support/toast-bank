@@ -37,7 +37,7 @@ function generateMonthlyChartData() {
   }))
 }
 
-const Asset = () => {
+const AssetPage = () => {
   const router = useRouter()
   return (
     <div className="p-3">
@@ -74,4 +74,4 @@ const Asset = () => {
   )
 }
 
-export default Asset
+export default AssetPage

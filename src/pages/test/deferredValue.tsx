@@ -1,4 +1,4 @@
-import List from '@/components/List'
+import List from '@/pages/test/List'
 import { useDeferredValue, useState } from 'react'
 
 const TestDeferredValue = () => {

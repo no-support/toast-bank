@@ -1,6 +1,6 @@
 import Map from '@/components/Map'
 
-const About = () => {
+const AboutPage = () => {
   return (
     <div className="p-3 space-y-2">
       <div className="title font-semibold flex justify-start items-center">
@@ -25,4 +25,4 @@ const About = () => {
   )
 }
 
-export default About
+export default AboutPage

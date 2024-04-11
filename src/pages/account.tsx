@@ -1,6 +1,6 @@
 import { transaction_list } from '@/mock/transaction'
 
-const Account = () => {
+const AccountPage = () => {
   return (
     <div className="p-3">
       <div className="history">
@@ -29,4 +29,4 @@ const Account = () => {
   )
 }
 
-export default Account
+export default AccountPage

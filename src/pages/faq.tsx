@@ -1,6 +1,6 @@
 import { Faq } from '@/interface/faq'
+import { oneDay } from '@/utils/constant'
 import axios from 'axios'
-import { revalidateTag } from 'next/cache'
 
 const FaqPage = ({ faqs }: { faqs: Faq[] }) => {
   return (
@@ -30,7 +30,7 @@ export async function getStaticProps() {
   const faqs = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`)
   return {
     props: { faqs: faqs.data },
-    revalidate: 60 * 60 * 24, // 24시간
+    revalidate: oneDay,
   }
 }
 export default FaqPage

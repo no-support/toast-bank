@@ -9,7 +9,7 @@ import Badge from '@/components/Badge'
 import Top from '@/components/Top'
 import { getCards } from '@/remote/card'
 
-const Cards = () => {
+const CardsPage = () => {
   const router = useRouter()
 
   const {
@@ -106,4 +106,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Cards
+export default CardsPage

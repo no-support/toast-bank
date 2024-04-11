@@ -1,5 +1,5 @@
 export interface Transaction {
-  userId: string
+  email: string
   type: 'deposit' | 'withdrawal'
   date: string
   displayText: string
