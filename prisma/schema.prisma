@@ -33,15 +33,20 @@ model Card {
   payback        String?
 }
 
+enum TransactionType {
+  deposit
+  withdrawal
+}
+
 model Transaction {
-  id          Int      @id @default(autoincrement())
-  email       String   @map("userId")
-  type        String
+  id          Int             @id @default(autoincrement())
+  email       String          @map("userId")
+  type        TransactionType
   date        DateTime
   displayText String
   amount      Int
   balance     Int
-  user        User     @relation(fields: [email], references: [email])
+  user        User            @relation(fields: [email], references: [email])
 }
 
 model Credit {

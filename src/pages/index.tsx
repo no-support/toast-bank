@@ -5,25 +5,36 @@ import Footer from '@/components/Footer'
 import { Card } from '@/interface/card'
 import { getCardRanking } from '@/remote/card'
 import { GetServerSidePropsContext } from 'next'
+import { DefaultSession, getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { FaAngleRight } from 'react-icons/fa'
+import { authOptions } from './api/auth/[...nextauth]'
+import { getCreditScore } from '@/remote/credit'
+import { Credit } from '@/interface/credit'
+import addDelimiter from '@/utils/addDelimiter'
+import { getBalance } from '@/remote/transaction'
 
 interface HomePageProps {
+  user?: DefaultSession['user']
+  balance?: number
+  credit?: Credit | null
   cards: Card[]
 }
 
-const HomePage = ({ cards }: HomePageProps) => {
+const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
   const router = useRouter()
   return (
     <>
       <div className="p-3">
         {/* 자산 */}
-        {true && (
+        {user && (
           <Container>
             <div className="flex flex-col justify-center h-full">
-              <span className="text-gray-500">홍길동 회원님의 자산</span>
-              <span className="font-semibold text-lg">127,000원</span>
+              <span className="text-gray-500">{user.name}회원님의 자산</span>
+              <span className="font-semibold text-lg">
+                {addDelimiter(balance ?? 0)}원
+              </span>
             </div>
             <Link
               href={'/asset'}
@@ -49,7 +60,7 @@ const HomePage = ({ cards }: HomePageProps) => {
             </Link>
           </div>
           <div>
-            <CreditScoreGauge score={100}></CreditScoreGauge>
+            <CreditScoreGauge score={credit?.score ?? 0}></CreditScoreGauge>
           </div>
         </Container>
         {/* 추천 카드 */}
@@ -100,6 +111,23 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ) => {
   const cards = await getCardRanking()
+
+  const { req, res } = context
+  const session = await getServerSession(req, res, authOptions)
+
+  if (session) {
+    const credit = await getCreditScore(session.user?.email as string)
+    const recentTransaction = await getBalance(session.user?.email as string)
+
+    return {
+      props: {
+        user: session.user,
+        balance: recentTransaction?.balance,
+        credit: credit,
+        cards: cards,
+      },
+    }
+  }
   return {
     props: { cards: cards },
   }

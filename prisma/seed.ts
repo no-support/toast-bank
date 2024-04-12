@@ -3,6 +3,7 @@ import faq_list from '../src/mock/faq.json'
 import card_list from '../src/mock/card.json'
 import transaction_list from '../src/mock/transaction.json'
 import credit_list from '../src/mock/credit.json'
+import { Transaction } from '@/interface/transaction'
 
 const prisma = new PrismaClient()
 
@@ -36,8 +37,6 @@ function seedFaq() {
     const res = await prisma.faq.create({
       data: faqData,
     })
-
-    console.log('seed.ts - res: ', res)
   })
 }
 
@@ -56,8 +55,6 @@ function seedCard() {
     const res = await prisma.card.create({
       data: cardData,
     })
-
-    console.log('seed.ts - res: ', res)
   })
 }
 
@@ -65,7 +62,7 @@ async function seedTransaction() {
   for (const transaction of transaction_list) {
     const transactionData = {
       email: transaction.email,
-      type: transaction.type,
+      type: transaction.type as 'deposit' | 'withdrawal',
       date: transaction.date,
       displayText: transaction.displayText,
       amount: transaction.amount,
@@ -74,8 +71,6 @@ async function seedTransaction() {
     const res = await prisma.transaction.create({
       data: transactionData,
     })
-
-    console.log('seed.ts - res: ', res)
   }
 }
 
@@ -88,7 +83,5 @@ async function seedCredit() {
     const res = await prisma.credit.create({
       data: creditData,
     })
-
-    console.log('seed.ts - res: ', res)
   }
 }

@@ -1,21 +1,13 @@
 import Chart from '@/components/Chart'
+import { getRecentTransaction } from '@/remote/transaction'
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-
-const chartData = [
-  { date: '2023-01', balance: 12000 },
-  { date: '2023-02', balance: 2000 },
-  { date: '2023-03', balance: 10000 },
-  { date: '2023-04', balance: 5000 },
-  { date: '2023-05', balance: 7000 },
-  { date: '2023-06', balance: 12000 },
-  { date: '2023-07', balance: 3000 },
-  { date: '2023-08', balance: 9000 },
-  { date: '2023-09', balance: 8000 },
-  { date: '2023-10', balance: 7000 },
-  { date: '2023-11', balance: 4000 },
-  { date: '2023-12', balance: 6000 },
-]
+import { authOptions } from './api/auth/[...nextauth]'
+import { Transaction } from '@/interface/transaction'
+import { format } from 'date-fns'
+import addDelimiter from '@/utils/addDelimiter'
 
 function generateMonthlyChartData() {
   return [
@@ -36,8 +28,10 @@ function generateMonthlyChartData() {
     balance: Math.floor(Math.random() * (100000 - 10000 + 1)) + 10000,
   }))
 }
-
-const AssetPage = () => {
+interface AssetPageProps {
+  transactions: Transaction[]
+}
+const AssetPage = ({ transactions }: AssetPageProps) => {
   const router = useRouter()
   return (
     <div className="p-3">
@@ -49,15 +43,25 @@ const AssetPage = () => {
         <div className="font-semibold my-3">입출금 내역</div>
 
         <ul>
-          {[...Array(5)].map((item, idx) => (
-            <div className="flex flex-row justify-between" key={idx}>
+          {transactions.map((transaction) => (
+            <div className="flex flex-row justify-between" key={transaction.id}>
               <div className="title">
-                <p className="font-semibold">홍길동</p>
-                <p>2024-03-01 22:10:11</p>
+                <p className="font-semibold">{transaction.displayText}</p>
+                <p>{format(transaction.date, 'yy-MM-dd HH:mm:ss')}</p>
+                <p></p>
               </div>
-              <div className="content">
-                <p className="text-primary-color">+12,000원</p>
-                <p className="">126,000원</p>
+              <div className="content flex flex-col items-end">
+                <p
+                  className={
+                    transaction.type === 'deposit'
+                      ? 'text-primary-color'
+                      : 'text-red-500'
+                  }
+                >
+                  {transaction.type === 'deposit' ? '+' : '-'}
+                  {addDelimiter(transaction.amount)}원
+                </p>
+                <p>{addDelimiter(transaction.balance)}원</p>
               </div>
             </div>
           ))}
@@ -74,4 +78,17 @@ const AssetPage = () => {
   )
 }
 
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  const { req, res } = context
+  const session = await getServerSession(req, res, authOptions)
+  if (!session) {
+    return { props: {} }
+  }
+  const transactions = await getRecentTransaction(session.user?.email as string)
+  return {
+    props: { transactions: JSON.parse(JSON.stringify(transactions)) },
+  }
+}
 export default AssetPage

@@ -6,14 +6,13 @@ import { getServerSession } from 'next-auth'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { authOptions } from '../api/auth/[...nextauth]'
-import { getCredit } from '@/remote/credit'
+import { getCreditScore } from '@/remote/credit'
 
 interface CreditPageProps {
   score: number
 }
 
 const CreditPage = ({ score = 0 }: CreditPageProps) => {
-  console.log('index.tsx - score: ', score)
   const router = useRouter()
   const { data } = useSession()
 
@@ -73,14 +72,13 @@ export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ) => {
   const { req, res } = context
-  console.log('credit page - getServerSideProps exec')
   const session = await getServerSession(req, res, authOptions)
   if (!session)
     return {
       props: {},
     }
 
-  const credit = await getCredit(session.user?.email as string)
+  const credit = await getCreditScore(session.user?.email as string)
 
   if (!credit)
     return {

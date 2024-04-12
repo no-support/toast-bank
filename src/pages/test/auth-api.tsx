@@ -5,7 +5,6 @@ const NeedAuthPage = () => {
     const fn = async () => {
       const res = await fetch('/api/hello')
       const data = await res.json()
-      console.log('auth-api.tsx - data: ', data)
     }
     fn()
   }, [])

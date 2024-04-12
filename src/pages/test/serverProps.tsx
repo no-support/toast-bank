@@ -11,7 +11,6 @@ const ServerProps = ({ now }: any) => {
 
 export const getServerSideProps = async () => {
   const date = new Date()
-  console.log('serverProps.tsx - typeof date: ', typeof date)
   return { props: { now: date.toLocaleTimeString() } }
 }
 export default ServerProps

@@ -1,7 +1,8 @@
+import { Credit } from '@/interface/credit'
 import prisma from '@/lib/db'
 
-export const getCredit = async (email: string) => {
-  const credit = await prisma.credit.findUnique({
+export const getCreditScore = async (email: string) => {
+  const credit: Credit | null = await prisma.credit.findUnique({
     where: {
       email: email,
     },
@@ -16,7 +17,7 @@ interface CreditProps {
 }
 
 export const upsertCredit = async ({ email, score }: CreditProps) => {
-  const credit = await prisma.credit.upsert({
+  const credit: Credit = await prisma.credit.upsert({
     where: {
       email: email,
     },

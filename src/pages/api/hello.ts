@@ -18,6 +18,5 @@ export default function handler(
 //   res: NextApiResponse<Data>,
 // ) {
 //   const session = await getServerSession(req, res, authOptions)
-//   console.log('test.ts - session 💕: ', session)
 //   res.status(200).json({ name: 'John Doe' })
 // }

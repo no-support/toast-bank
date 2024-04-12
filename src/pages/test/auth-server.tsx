@@ -4,7 +4,7 @@ import { getSession } from 'next-auth/react'
 import { GetServerSidePropsContext } from 'next'
 
 const NeedAuthPage = () => {
-  // getSession().then((result) => console.log(result))
+  // getSession().then((result) => {})
 
   return <>AuthenticatedPage</>
 }
