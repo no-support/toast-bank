@@ -1,5 +1,5 @@
 import { Card } from '@/interface/card'
-import prisma from '@/utils/db'
+import prisma from '@/lib/db'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 const LIMIT = 10

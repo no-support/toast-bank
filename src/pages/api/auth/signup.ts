@@ -1,4 +1,4 @@
-import prisma from '@/utils/db'
+import prisma from '@/lib/db'
 import type { NextApiRequest, NextApiResponse } from 'next'
 import bcrypt from 'bcrypt'
 

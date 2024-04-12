@@ -1,22 +1,23 @@
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import { redirect } from 'next/navigation'
+import { getSession } from 'next-auth/react'
+import { GetServerSidePropsContext } from 'next'
 
 const NeedAuthPage = () => {
-  console.log('auth-server.tsx - test: ')
-  /* 
-  const session = await getServerSession(authOptions)
-  console.log('auth.tsx - session: ', session)
-  if (!session) {
-    redirect('/')
-  }
-  */
+  // getSession().then((result) => console.log(result))
+
   return <>AuthenticatedPage</>
 }
 
-export const getServerSideProps = async () => {
-  const session = await getServerSession(authOptions)
-  console.log('auth.tsx - session: ', session)
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  // const session = await getSession() // null
+  const { req, res } = context
+  const session = await getServerSession(req, res, authOptions)
+  if (session?.user) {
+  }
+  return { props: {} }
 }
 
 export default NeedAuthPage

@@ -1,7 +1,12 @@
 import PageLoader from '@/components/PageLoader'
+import { upsertCredit } from '@/remote/credit'
+import { GetServerSidePropsContext } from 'next'
+import { getServerSession } from 'next-auth'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-confetti-boom'
+import { authOptions } from '../api/auth/[...nextauth]'
+import getRandomNumber from '@/utils/getRandomNumber'
 
 const CheckPage = () => {
   const [pending, setPending] = useState(5)
@@ -11,13 +16,11 @@ const CheckPage = () => {
     const timer = setTimeout(() => {
       if (pending > 0) {
         setPending(pending - 1)
-      } else {
-        // TODO: 신용 정보 createOrUpdate
       }
     }, 1000)
 
     return () => clearTimeout(timer)
-  }, [pending, router])
+  }, [pending])
 
   return (
     <div>
@@ -38,7 +41,8 @@ const CheckPage = () => {
           <button
             className="w-[calc(100%-1.5rem)] absolute bottom-3"
             onClick={() => {
-              window.history.back()
+              // window.history.back()
+              router.back()
             }}
           >
             확인
@@ -49,8 +53,18 @@ const CheckPage = () => {
   )
 }
 
-function getCreditScore(min: number = 200, max: number = 1000) {
-  return Math.floor(Math.random() * (max - min + 1)) + min
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  const { req, res } = context
+  const session = await getServerSession(req, res, authOptions)
+  const score = getRandomNumber(200, 1000)
+  const result = await upsertCredit({
+    email: session?.user?.email as string,
+    score: score,
+  })
+
+  return { props: {} }
 }
 
 export default CheckPage

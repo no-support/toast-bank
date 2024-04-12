@@ -1,16 +1,30 @@
+import type { GetServerSidePropsContext } from 'next'
 import CreditScoreGauge from '@/components/CreditScoreGauge'
 import Modal from '@/components/Modal'
-import { useState } from 'react'
+import useModal from '@/hooks/useModal'
+import { getServerSession } from 'next-auth'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import { authOptions } from '../api/auth/[...nextauth]'
+import { getCredit } from '@/remote/credit'
 
-const CreditPage = () => {
-  // TODO: 신용 조회가 완료되었으면 점수를 게이지에 보여줄 것
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
-  const openModal = () => {
-    setIsModalOpen(true)
-  }
+interface CreditPageProps {
+  score: number
+}
 
-  const closeModal = () => {
-    setIsModalOpen(false)
+const CreditPage = ({ score = 0 }: CreditPageProps) => {
+  console.log('index.tsx - score: ', score)
+  const router = useRouter()
+  const { data } = useSession()
+
+  const { isModalOpen, openModal, closeModal } = useModal()
+
+  const handleClick = () => {
+    if (!data?.user) {
+      openModal()
+    } else {
+      router.push('/credit/check')
+    }
   }
 
   return (
@@ -20,7 +34,7 @@ const CreditPage = () => {
           내 신용 점수를 <br /> 조회하고 관리해보세요
         </span>
         <div className="h-32">
-          <CreditScoreGauge score={0}></CreditScoreGauge>
+          <CreditScoreGauge score={score}></CreditScoreGauge>
         </div>
       </div>
 
@@ -38,7 +52,7 @@ const CreditPage = () => {
       <div className="retrieve-section">
         <button
           className="w-[calc(100%-1.5rem)] absolute bottom-3"
-          onClick={openModal}
+          onClick={handleClick}
         >
           30초 만에 신용 점수 조회하기
         </button>
@@ -49,10 +63,31 @@ const CreditPage = () => {
           content={
             '정확한 신용 정보를 확인하기 위해 로그인을 먼저 진행해주세요'
           }
-        ></Modal>
+        />
       </div>
     </div>
   )
 }
 
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  const { req, res } = context
+  console.log('credit page - getServerSideProps exec')
+  const session = await getServerSession(req, res, authOptions)
+  if (!session)
+    return {
+      props: {},
+    }
+
+  const credit = await getCredit(session.user?.email as string)
+
+  if (!credit)
+    return {
+      props: {},
+    }
+  return {
+    props: { score: credit.score },
+  }
+}
 export default CreditPage

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { CardRes } from '@/pages/api/card'
 import { Card } from '@/interface/card'
-import prisma from '@/utils/db'
+import prisma from '@/lib/db'
 
 export const getSearchCards = async (keyword: string) => {
   const { data }: { data: Card[] } = await axios.get(

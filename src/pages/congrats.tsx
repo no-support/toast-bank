@@ -11,7 +11,7 @@ const CongratsPage = () => {
       if (countdown > 1) {
         setCountdown(countdown - 1)
       } else {
-        router.push('/api/auth/signin')
+        router.push('/signin')
       }
     }, 1000)
 

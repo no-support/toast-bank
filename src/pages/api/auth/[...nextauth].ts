@@ -1,7 +1,7 @@
 import NextAuth, { NextAuthOptions } from 'next-auth'
 import { PrismaAdapter } from '@auth/prisma-adapter'
 import { Adapter } from 'next-auth/adapters'
-import prisma from '@/utils/db'
+import prisma from '@/lib/db'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import bcrypt from 'bcrypt'
 
@@ -50,7 +50,7 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    jwt: async ({ token, user }: any) => {
+    jwt: async ({ token, user }) => {
       if (user) {
         return {
           ...token,

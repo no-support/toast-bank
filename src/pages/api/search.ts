@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import prisma from '@/utils/db'
+import prisma from '@/lib/db'
 import { Card } from '@/interface/card'
 
 export default async function handler(
