@@ -14,32 +14,29 @@ export const authOptions: NextAuthOptions = {
         email: {},
         password: {},
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         if (!credentials) {
           return null
         }
-        const user = await prisma.user.findUnique({
+        const userDao = await prisma.user.findUnique({
           where: {
-            email: req.query?.email,
+            email: credentials.email,
           },
         })
-        if (!user) {
+        if (!userDao) {
           console.error('없는 이메일')
           return null
         }
         const passwordChk = await bcrypt.compare(
-          req.query?.password,
-          user.password,
+          credentials.password,
+          userDao.password,
         )
         if (!passwordChk) {
           console.error('비밀번호 불일치')
           return null
         }
-        return {
-          id: user.id + '',
-          email: user.email,
-          name: user.name,
-        }
+        const { password, ...user } = userDao
+        return user
       },
     }),
   ],
@@ -50,19 +47,10 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    jwt: async ({ token, user }) => {
-      if (user) {
-        return {
-          ...token,
-          user: { ...user },
-        }
-      }
-      return token
-    },
-    session: async ({ session, token }: any) => {
+    session: async ({ session, token }) => {
       return {
         ...session,
-        user: { ...token.user },
+        user: { name: token.name, email: token.email },
       }
     },
   },

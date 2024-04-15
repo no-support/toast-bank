@@ -1,3 +1,5 @@
+import { Provider } from 'react-redux'
+import store from '@/store'
 import { SessionProvider } from 'next-auth/react'
 import Navbar from '@/components/Navbar'
 import '@/styles/globals.css'
@@ -6,6 +8,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
+import ThemeInitializer from '@/components/ThemeInitializer'
+
 const queryClient = new QueryClient()
 
 export default function App({
@@ -13,18 +17,17 @@ export default function App({
   pageProps: { session, ...pageProps },
 }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <QueryClientProvider client={queryClient}>
-        <Navbar />
-        <Component {...pageProps} />
-        <ToastContainer
-          theme="dark"
-          autoClose={3000}
-          hideProgressBar
-          newestOnTop
-        />
-        <ReactQueryDevtools />
-      </QueryClientProvider>
-    </SessionProvider>
+    <Provider store={store}>
+      <SessionProvider session={session}>
+        <QueryClientProvider client={queryClient}>
+          <ThemeInitializer>
+            <Navbar />
+            <Component {...pageProps} />
+            <ToastContainer autoClose={3000} hideProgressBar newestOnTop />
+          </ThemeInitializer>
+          <ReactQueryDevtools />
+        </QueryClientProvider>
+      </SessionProvider>
+    </Provider>
   )
 }

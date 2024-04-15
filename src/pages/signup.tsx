@@ -35,7 +35,7 @@ const SignUpPage = () => {
         <div className="flex flex-col">
           <label
             htmlFor="email"
-            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500"
+            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500 text-text"
           >
             이메일
           </label>
@@ -53,7 +53,7 @@ const SignUpPage = () => {
           />
           <div className="h-8">
             {errors.email && (
-              <span className="text-xs text-red-600">
+              <span className="text-xs text-red-500">
                 {errors.email.message}
               </span>
             )}
@@ -64,7 +64,7 @@ const SignUpPage = () => {
         <div className="flex flex-col">
           <label
             htmlFor="password"
-            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500"
+            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500 text-text"
           >
             패스워드
           </label>
@@ -90,7 +90,7 @@ const SignUpPage = () => {
           </div>
           <div className="h-8">
             {errors.password && (
-              <span className="text-xs text-red-600">
+              <span className="text-xs text-red-500">
                 {errors.password.message}
               </span>
             )}
@@ -101,7 +101,7 @@ const SignUpPage = () => {
         <div className="flex flex-col">
           <label
             htmlFor="passwordChk"
-            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500"
+            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500 text-text"
           >
             패스워드 확인
           </label>
@@ -128,7 +128,7 @@ const SignUpPage = () => {
           </div>
           <div className="h-8">
             {errors.passwordChk && (
-              <span className="text-xs text-red-600">
+              <span className="text-xs text-red-500">
                 {errors.passwordChk.message}
               </span>
             )}
@@ -139,7 +139,7 @@ const SignUpPage = () => {
         <div className="flex flex-col">
           <label
             htmlFor="name"
-            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500"
+            className="text-sm mb-1.5 after:content-['*'] after:ml-0.5 after:text-red-500 text-text"
           >
             이름
           </label>
@@ -149,7 +149,7 @@ const SignUpPage = () => {
           />
           <div className="h-8">
             {errors.name && (
-              <span className="text-xs text-red-600">
+              <span className="text-xs text-red-500">
                 {errors.name.message}
               </span>
             )}
@@ -158,7 +158,7 @@ const SignUpPage = () => {
 
         <div className="h-8"></div>
         <button
-          className={`w-full p-2 bg-primary-color rounded-md text-white disabled:opacity-50 disabled:cursor-not-allowed `}
+          className={`w-full p-2 bg-primary rounded-md text-white disabled:opacity-50 disabled:cursor-not-allowed `}
           type="submit"
           disabled={!isDirty || !isValid}
         >

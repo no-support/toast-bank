@@ -11,12 +11,12 @@ const Footer = () => {
       "
       >
         <li>
-          <Link href={'/faq'} className="text-primary-color">
+          <Link href={'/faq'} className="text-primary">
             FAQ
           </Link>
         </li>
         <li>
-          <Link href={'/about'} className="text-primary-color">
+          <Link href={'/about'} className="text-primary">
             오시는 길
           </Link>
         </li>

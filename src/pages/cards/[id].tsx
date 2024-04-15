@@ -39,8 +39,8 @@ const CardDetailPage = ({ initialCard }: CardDetailPageProps) => {
   return (
     <div className="p-3">
       <div className="header-section flex flex-col">
-        <span className="font-semibold">{name}</span>
-        <span>{subTitle}</span>
+        <span className="font-semibold text-text">{name}</span>
+        <span className="text-text">{subTitle}</span>
       </div>
 
       <div className="contents-section">
@@ -60,10 +60,10 @@ const CardDetailPage = ({ initialCard }: CardDetailPageProps) => {
                 translateX: 0,
               }}
             >
-              <FiCheckCircle className="text-primary-color" size={40} />
+              <FiCheckCircle className="text-primary" size={40} />
               <div className="flex flex-col">
-                <span className="font-semibold">혜택{idx + 1}</span>
-                <span className="text-sm">{item}</span>
+                <span className="font-semibold text-text">혜택{idx + 1}</span>
+                <span className="text-sm text-text">{item}</span>
               </div>
             </motion.li>
           ))}
@@ -71,8 +71,10 @@ const CardDetailPage = ({ initialCard }: CardDetailPageProps) => {
 
         {promotionTerms != null && (
           <div className="warning-section flex flex-col mb-6">
-            <span className="font-semibold">유의사항</span>
-            <span className="text-xs">{removeHtmlTags(promotionTerms)}</span>
+            <span className="font-semibold text-text">유의사항</span>
+            <span className="text-xs text-text">
+              {removeHtmlTags(promotionTerms)}
+            </span>
           </div>
         )}
 

@@ -27,7 +27,7 @@ function CreditScoreGauge({
   const dashoffset = totalLenght - (score / MAX_CREDIT_SCORE) * totalLenght
 
   return (
-    <div className={`w-[${width}px] h-[${height}px] relative`}>
+    <div className={`w-[${width}px] h-[${height}px] relative bg-background`}>
       <svg
         width={width}
         height={height}
@@ -55,7 +55,7 @@ function CreditScoreGauge({
           strokeDashoffset={dashoffset}
         ></path>
       </svg>
-      <span className="font-semibold absolute bottom-1/4 -translate-x-1/2 left-1/2 text-lg">
+      <span className="font-semibold absolute bottom-1/4 -translate-x-1/2 left-1/2 text-lg text-text">
         {score === 0 ? '???' : addDelimiter(score)}
       </span>
     </div>

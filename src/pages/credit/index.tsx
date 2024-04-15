@@ -29,7 +29,7 @@ const CreditPage = ({ score = 0 }: CreditPageProps) => {
   return (
     <div className="p-3">
       <div className="gauge-section flex flex-col items-center mb-8">
-        <span className="font-semibold text-center mb-4">
+        <span className="font-semibold text-center mb-4 text-text">
           내 신용 점수를 <br /> 조회하고 관리해보세요
         </span>
         <div className="h-32">
@@ -39,12 +39,16 @@ const CreditPage = ({ score = 0 }: CreditPageProps) => {
 
       <div className="introduce-section">
         <div className="flex flex-col mb-4">
-          <span className="font-semibold">정확한 신용평점</span>
-          <span>대표 신용평가 기관의 데이터로 관리해요</span>
+          <span className="font-semibold text-text">정확한 신용평점</span>
+          <span className="text-text">
+            대표 신용평가 기관의 데이터로 관리해요
+          </span>
         </div>
         <div className="flex flex-col mb-4">
-          <span className="font-semibold">신용 점수 무료 조회</span>
-          <span>신용 점수에 영향 없이 무료로 조회가 가능해요</span>
+          <span className="font-semibold text-text">신용 점수 무료 조회</span>
+          <span className="text-text">
+            신용 점수에 영향 없이 무료로 조회가 가능해요
+          </span>
         </div>
       </div>
 
@@ -78,7 +82,7 @@ export const getServerSideProps = async (
       props: {},
     }
 
-  const credit = await getCreditScore(session.user?.email as string)
+  const credit = await getCreditScore(session.user.email)
 
   if (!credit)
     return {

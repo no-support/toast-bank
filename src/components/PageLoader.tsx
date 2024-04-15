@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 function PageLoader({ message }: { message?: string }) {
   return (
-    <div className="flex h-[calc(100vh-3rem)] justify-center items-center">
+    <div className="flex h-[calc(100vh-3rem)] justify-center items-center bg-background">
       <div className="flex flex-col items-center">
         <Image
           width={120}
@@ -13,7 +13,7 @@ function PageLoader({ message }: { message?: string }) {
         {message != null ? (
           <>
             <div className=""></div>
-            <p className="mt-10">{message}</p>
+            <p className="mt-10 text-text">{message}</p>
           </>
         ) : null}
       </div>

@@ -30,7 +30,7 @@ const Map = () => {
         strategy="afterInteractive"
         onReady={loadKakaoMap}
       />
-      <div id="map" className="h-96 bg-gray-300 rounded-lg"></div>
+      <div id="map" className="h-96 rounded-lg"></div>
     </>
   )
 }

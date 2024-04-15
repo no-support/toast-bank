@@ -37,11 +37,10 @@ const CheckPage = () => {
             effectCount={Infinity}
             launchSpeed={3}
           />
-          <p>조회가 완료되었어요!</p>
+          <p className="text-text">조회가 완료되었어요!</p>
           <button
             className="w-[calc(100%-1.5rem)] absolute bottom-3"
             onClick={() => {
-              // window.history.back()
               router.back()
             }}
           >
@@ -60,7 +59,7 @@ export const getServerSideProps = async (
   const session = await getServerSession(req, res, authOptions)
   const score = getRandomNumber(200, 1000)
   const result = await upsertCredit({
-    email: session?.user?.email as string,
+    email: session!.user.email,
     score: score,
   })
 

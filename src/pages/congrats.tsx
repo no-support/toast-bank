@@ -27,7 +27,7 @@ const CongratsPage = () => {
           spreadDeg={50}
           launchSpeed={3}
         />
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center text-text">
           <p>회원 가입이 완료되었어요!</p>
           <p>{`${countdown}초 후에 로그인 페이지로 이동해요.`}</p>
         </div>

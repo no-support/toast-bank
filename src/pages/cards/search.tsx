@@ -34,7 +34,7 @@ const SearchPage = () => {
   }, [])
 
   return (
-    <div className="w-full p-3">
+    <div className="w-full p-3 bg-background">
       <Top title="추천 카드" subTitle="회원님을 위해 준비했어요" />
       <div className="py-3">
         <input ref={inputRef} value={keyword} onChange={handleKeyword} />
@@ -42,7 +42,7 @@ const SearchPage = () => {
 
       {keyword !== '' && data?.length === 0 ? (
         <div className="p-6">
-          <span>찾으시는 카드가 없습니다</span>
+          <span className="text-text">찾으시는 카드가 없습니다</span>
         </div>
       ) : (
         <ul>
@@ -55,12 +55,14 @@ const SearchPage = () => {
                 }}
               >
                 <div className="flex flex-col justify-around">
-                  <span className="font-semibold">{`${card.id}`}위</span>
-                  <span>{card.name}</span>
+                  <span className="font-semibold text-text">
+                    {`${card.id}`}위
+                  </span>
+                  <span className="text-text">{card.name}</span>
                 </div>
                 <div className="flex justify-center items-center">
                   {card.payback && <Badge text={`${card.payback}`} />}
-                  <FaAngleRight className="w-6 h-6" />
+                  <FaAngleRight className="w-6 h-6 text-text" />
                 </div>
               </div>
             </li>

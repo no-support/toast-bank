@@ -2,7 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   margin: 0;
   /* box-sizing: border-box; */
 }
@@ -38,7 +39,7 @@ body {
 
 @layer base {
   button {
-    @apply p-2 bg-primary-color rounded-md text-white;
+    @apply p-2 bg-primary rounded-md text-white;
   }
 
   input {
@@ -46,6 +47,26 @@ body {
   }
 
   ul {
-    @apply space-y-2
+    @apply space-y-2;
   }
+}
+
+.light {
+  --primary-color: #007bff;
+  --background-color: #ffffff;
+  --text-color: #111827;
+}
+
+.dark {
+  --primary-color: #007bff;
+  --background-color: #202938;
+  --text-color: #f3f4f6;
+
+  background: var(--background-color);
+}
+
+:root {
+  --primary-color: #007bff;
+  --background-color: #ffffff;
+  --text-color: #111827;
 }

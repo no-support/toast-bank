@@ -32,13 +32,13 @@ const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
           <Container>
             <div className="flex flex-col justify-center h-full">
               <span className="text-gray-500">{user.name}회원님의 자산</span>
-              <span className="font-semibold text-lg">
+              <span className="font-semibold text-lg text-text">
                 {addDelimiter(balance ?? 0)}원
               </span>
             </div>
             <Link
               href={'/asset'}
-              className="p-2 bg-primary-color rounded-md text-white "
+              className="p-2 bg-primary rounded-md text-white "
             >
               분석
             </Link>
@@ -47,14 +47,14 @@ const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
         {/* 신용 점수 */}
         <Container>
           <div className="flex flex-col justify-center h-full gap-3">
-            <span className="font-semibold">
+            <span className="font-semibold text-text">
               나의 신용도를 증명하고
               <br />
               점수를 올리세요
             </span>
             <Link
               href={'/credit'}
-              className="p-2 bg-primary-color rounded-md text-white "
+              className="p-2 bg-primary rounded-md text-white "
             >
               내 신용 점수 보러 가기
             </Link>
@@ -67,7 +67,7 @@ const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
         <div className="recommend-card ">
           {/* 추천 카드 헤더 */}
           <div className="header w-full h-12 flex justify-between items-center">
-            <span className="font-semibold">추천 카드</span>
+            <span className="font-semibold text-text">추천 카드</span>
           </div>
           {/* 추천 카드 콘텐츠 */}
           <div className="contents-section">
@@ -81,12 +81,14 @@ const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
                     }}
                   >
                     <div className="flex flex-col justify-around">
-                      <span className="font-semibold">{`${card.id}`}위</span>
-                      <span>{card.name}</span>
+                      <span className="font-semibold text-text">
+                        {`${card.id}`}위
+                      </span>
+                      <span className="text-text">{card.name}</span>
                     </div>
                     <div className="flex justify-center items-center">
                       {card.payback && <Badge text={`${card.payback}`} />}
-                      <FaAngleRight className="w-6 h-6" />
+                      <FaAngleRight className="w-6 h-6 text-text" />
                     </div>
                   </div>
                 </li>
@@ -95,7 +97,7 @@ const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
           </div>
           {/* 추천 카드 더보기 */}
           <Link
-            className="bg-white border border-primary-color w-full h-12 my-3 flex justify-center items-center"
+            className="bg-white border border-primary w-full h-12 my-3 flex justify-center items-center"
             href={'/cards'}
           >
             더 보기
@@ -116,8 +118,8 @@ export const getServerSideProps = async (
   const session = await getServerSession(req, res, authOptions)
 
   if (session) {
-    const credit = await getCreditScore(session.user?.email as string)
-    const recentTransaction = await getBalance(session.user?.email as string)
+    const credit = await getCreditScore(session.user.email)
+    const recentTransaction = await getBalance(session.user.email)
 
     return {
       props: {

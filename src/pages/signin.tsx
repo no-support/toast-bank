@@ -22,7 +22,7 @@ const SignInPage = ({
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     try {
-      const res = await signIn('credentials', { redirect: false }, formData)
+      const res = await signIn('credentials', { ...formData, redirect: false })
       if (res?.error) throw new Error(res.error)
     } catch (e) {
       toast.error('이메일과 비밀번호를 확인해주세요.')
@@ -35,7 +35,7 @@ const SignInPage = ({
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         {/* 이메일 */}
         <div className="flex flex-col">
-          <label htmlFor="email" className="text-sm mb-1.5">
+          <label htmlFor="email" className="text-sm mb-1.5 text-text">
             이메일
           </label>
           <input
@@ -53,7 +53,7 @@ const SignInPage = ({
 
         {/* 패스워드 */}
         <div className="flex flex-col">
-          <label htmlFor="password" className="text-sm mb-1.5">
+          <label htmlFor="password" className="text-sm mb-1.5 text-text">
             패스워드
           </label>
           <input
@@ -65,7 +65,7 @@ const SignInPage = ({
         </div>
         <div className="h-8"></div>
         <button
-          className={`w-full p-2 bg-primary-color rounded-md text-white ${
+          className={`w-full p-2 bg-primary rounded-md text-white ${
             !isDirty || !isValid ? 'opacity-50 cursor-not-allowed' : ''
           }`}
           type="submit"
@@ -76,7 +76,7 @@ const SignInPage = ({
       </form>
 
       <div className="h-3"></div>
-      <Link href={'/signup'} className="text-center text-primary-color">
+      <Link href={'/signup'} className="text-center text-primary">
         아직 계정이 없으신가요?
       </Link>
     </div>
