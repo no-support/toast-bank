@@ -8,6 +8,7 @@ import { mainColor } from '@/utils/constant'
 import Badge from '@/components/Badge'
 import Top from '@/components/Top'
 import { getCards } from '@/remote/card'
+import Head from 'next/head'
 
 const CardsPage = () => {
   const router = useRouter()
@@ -40,56 +41,67 @@ const CardsPage = () => {
   }
 
   return (
-    <div className="w-full p-3 bg-background">
-      <Top title="추천 카드" subTitle="회원님을 위해 준비했어요" />
-      <div className="py-3">
-        <input
-          onFocus={() => {
-            router.push('/cards/search')
-          }}
+    <>
+      <Head>
+        <title>토스트뱅크 | 추천 카드</title>
+        <meta property="og:title" content="토스트뱅크" />
+        <meta
+          property="og:description"
+          content="완전히 새로운 은행을 만나보세요"
         />
-      </div>
-
-      <InfiniteScroll
-        dataLength={cards ? cards.length : 0}
-        hasMore={hasNextPage}
-        loader={
-          <ThreeDots
-            height="80"
-            width="80"
-            color={mainColor}
-            ariaLabel="three-dots-loading"
-            wrapperClass="justify-center"
+        <meta property="og:image" content="/thumbnail.png" />
+      </Head>
+      <div className="w-full p-3 bg-background">
+        <Top title="추천 카드" subTitle="회원님을 위해 준비했어요" />
+        <div className="py-3">
+          <input
+            onFocus={() => {
+              router.push('/cards/search')
+            }}
           />
-        }
-        next={loadMore}
-      >
-        <ul>
-          {cards &&
-            cards.map((card, idx) => (
-              <li key={card.id}>
-                <div
-                  className="item h-16 flex justify-between items-center cursor-pointer"
-                  onClick={() => {
-                    router.push(`/cards/${card.id}`)
-                  }}
-                >
-                  <div className="flex flex-col justify-around">
-                    <span className="font-semibold text-text">
-                      {`${card.id}`}위
-                    </span>
-                    <span className="text-text">{card.name}</span>
+        </div>
+
+        <InfiniteScroll
+          dataLength={cards ? cards.length : 0}
+          hasMore={hasNextPage}
+          loader={
+            <ThreeDots
+              height="80"
+              width="80"
+              color={mainColor}
+              ariaLabel="three-dots-loading"
+              wrapperClass="justify-center"
+            />
+          }
+          next={loadMore}
+        >
+          <ul>
+            {cards &&
+              cards.map((card, idx) => (
+                <li key={card.id}>
+                  <div
+                    className="item h-16 flex justify-between items-center cursor-pointer"
+                    onClick={() => {
+                      router.push(`/cards/${card.id}`)
+                    }}
+                  >
+                    <div className="flex flex-col justify-around">
+                      <span className="font-semibold text-text">
+                        {`${card.id}`}위
+                      </span>
+                      <span className="text-text">{card.name}</span>
+                    </div>
+                    <div className="flex justify-center items-center">
+                      {card.payback && <Badge text={`${card.payback}`} />}
+                      <FaAngleRight className="w-6 h-6 text-text" />
+                    </div>
                   </div>
-                  <div className="flex justify-center items-center">
-                    {card.payback && <Badge text={`${card.payback}`} />}
-                    <FaAngleRight className="w-6 h-6 text-text" />
-                  </div>
-                </div>
-              </li>
-            ))}
-        </ul>
-      </InfiniteScroll>
-    </div>
+                </li>
+              ))}
+          </ul>
+        </InfiniteScroll>
+      </div>
+    </>
   )
 }
 

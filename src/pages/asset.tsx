@@ -34,53 +34,65 @@ interface AssetPageProps {
 const AssetPage = ({ transactions }: AssetPageProps) => {
   const router = useRouter()
   return (
-    <div className="p-3">
-      <div>
-        <Chart chartData={generateMonthlyChartData()} />
-      </div>
+    <>
+      <title>토스트뱅크 | 나의 자산</title>
+      <meta property="og:title" content="토스트뱅크" />
+      <meta
+        property="og:description"
+        content="완전히 새로운 은행을 만나보세요"
+      />
+      <meta property="og:image" content="/thumbnail.png" />
+      <div className="p-3">
+        <div>
+          <Chart chartData={generateMonthlyChartData()} />
+        </div>
 
-      <div className="history">
-        <div className="font-semibold my-3 text-text">입출금 내역</div>
+        <div className="history">
+          <div className="font-semibold my-3 text-text">입출금 내역</div>
 
-        <ul>
-          {transactions.map((transaction) => (
-            <div className="flex flex-row justify-between" key={transaction.id}>
-              <div className="title">
-                <p className="font-semibold text-text">
-                  {transaction.displayText}
-                </p>
-                <p className="text-text">
-                  {format(transaction.date, 'yy-MM-dd HH:mm:ss')}
-                </p>
-                <p></p>
+          <ul>
+            {transactions.map((transaction) => (
+              <div
+                className="flex flex-row justify-between"
+                key={transaction.id}
+              >
+                <div className="title">
+                  <p className="font-semibold text-text">
+                    {transaction.displayText}
+                  </p>
+                  <p className="text-text">
+                    {format(transaction.date, 'yy-MM-dd HH:mm:ss')}
+                  </p>
+                  <p></p>
+                </div>
+                <div className="content flex flex-col items-end">
+                  <p
+                    className={
+                      transaction.type === 'deposit'
+                        ? 'text-primary'
+                        : 'text-red-500'
+                    }
+                  >
+                    {transaction.type === 'deposit' ? '+' : '-'}
+                    {addDelimiter(transaction.amount)}원
+                  </p>
+                  <p className="text-text">
+                    {addDelimiter(transaction.balance)}원
+                  </p>
+                </div>
               </div>
-              <div className="content flex flex-col items-end">
-                <p
-                  className={
-                    transaction.type === 'deposit'
-                      ? 'text-primary'
-                      : 'text-red-500'
-                  }
-                >
-                  {transaction.type === 'deposit' ? '+' : '-'}
-                  {addDelimiter(transaction.amount)}원
-                </p>
-                <p className="text-text">
-                  {addDelimiter(transaction.balance)}원
-                </p>
-              </div>
-            </div>
-          ))}
-        </ul>
+            ))}
+          </ul>
 
-        <Link
-          className="bg-white border border-primary w-full h-12 my-3 flex justify-center items-center"
-          href={'/transaction'}
-        >
-          자세히 보기
-        </Link>
+          <Link
+            className="bg-white border border-primary w-full h-12 my-3 flex justify-center items-center"
+            href={'/transaction'}
+          >
+            자세히 보기
+          </Link>
+        </div>
       </div>
-    </div>
+    </>
   )
 }
 

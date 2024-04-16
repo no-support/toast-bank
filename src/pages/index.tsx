@@ -14,6 +14,7 @@ import { getCreditScore } from '@/remote/credit'
 import { Credit } from '@/interface/credit'
 import addDelimiter from '@/utils/addDelimiter'
 import { getBalance } from '@/remote/transaction'
+import Head from 'next/head'
 
 interface HomePageProps {
   user?: DefaultSession['user']
@@ -26,6 +27,15 @@ const HomePage = ({ user, balance, credit, cards }: HomePageProps) => {
   const router = useRouter()
   return (
     <>
+      <Head>
+        <title>토스트뱅크</title>
+        <meta property="og:title" content="토스트뱅크" />
+        <meta
+          property="og:description"
+          content="완전히 새로운 은행을 만나보세요"
+        />
+        <meta property="og:image" content="/thumbnail.png" />
+      </Head>
       <div className="p-3">
         {/* 자산 */}
         {user && (

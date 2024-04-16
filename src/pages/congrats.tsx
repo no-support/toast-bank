@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import Confetti from 'react-confetti-boom'
@@ -20,6 +21,15 @@ const CongratsPage = () => {
 
   return (
     <>
+      <Head>
+        <title>토스트뱅크 | 회원 가입 완료</title>
+        <meta property="og:title" content="토스트뱅크" />
+        <meta
+          property="og:description"
+          content="완전히 새로운 은행을 만나보세요"
+        />
+        <meta property="og:image" content="/thumbnail.png" />
+      </Head>
       <div className="flex h-[calc(100vh-3rem)] justify-center items-center">
         <Confetti
           mode="boom"
