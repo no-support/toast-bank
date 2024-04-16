@@ -75,7 +75,7 @@ const AssetPage = ({ transactions }: AssetPageProps) => {
 
         <Link
           className="bg-white border border-primary w-full h-12 my-3 flex justify-center items-center"
-          href={'/account'}
+          href={'/transaction'}
         >
           자세히 보기
         </Link>

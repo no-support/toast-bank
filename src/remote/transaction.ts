@@ -1,5 +1,7 @@
 import { Transaction } from '@/interface/transaction'
 import prisma from '@/lib/db'
+import { TransactionRes } from '@/pages/api/transaction'
+import axios from 'axios'
 
 export const getRecentTransaction = async (email: string) => {
   const transactions: Transaction[] = await prisma.transaction.findMany({
@@ -25,4 +27,11 @@ export const getBalance = async (email: string) => {
     },
   })
   return recentTransaction
+}
+
+export const getTransactions = async ({ type = 'all', pageParam = 1 }) => {
+  const { data }: { data: TransactionRes } = await axios.get(
+    `/api/transaction?type=${type}&page=${pageParam}`,
+  )
+  return data
 }

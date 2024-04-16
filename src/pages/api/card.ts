@@ -15,7 +15,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<CardRes>,
 ) {
-  const { page = '' }: { page?: string } = req.query
+  const { page = '1' }: { page?: string } = req.query
 
   const nPage = parseInt(page)
   const count = await prisma.card.count()

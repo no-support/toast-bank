@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import ConfettiExplosion from 'react-confetti-explosion'
 
 const TestConfetti = () => {
   const result = useQuery({
