@@ -25,7 +25,7 @@ export default function App({
             <Component {...pageProps} />
             <ToastContainer autoClose={3000} hideProgressBar newestOnTop />
           </ThemeInitializer>
-          <ReactQueryDevtools />
+          {process.env.NODE_ENV === 'development' && <ReactQueryDevtools />}
         </QueryClientProvider>
       </SessionProvider>
     </Provider>

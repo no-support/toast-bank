@@ -11,7 +11,6 @@ const TestConfetti = () => {
       return data
     },
   })
-  console.log('confetti.tsx - result: ', result)
   return (
     <>
       <div className="flex justify-center">

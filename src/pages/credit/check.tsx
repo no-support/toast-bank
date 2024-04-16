@@ -27,6 +27,12 @@ const CheckPage = () => {
     <>
       <Head>
         <title>토스트뱅크 | 신용 조회</title>
+        <meta property="og:title" content="토스트뱅크" />
+        <meta
+          property="og:description"
+          content="완전히 새로운 은행을 만나보세요"
+        />
+        <meta property="og:image" content="/thumbnail.png" />
       </Head>
       <div>
         {pending ? (

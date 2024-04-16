@@ -15,7 +15,6 @@ export const getServerSideProps = async (
   // const session = await getSession() // null
   const { req, res } = context
   const session = await getServerSession(req, res, authOptions)
-  console.log('auth-server.tsx - session: ', session)
   if (session?.user) {
   }
   return { props: {} }

@@ -27,7 +27,6 @@ export const getServerSideProps = async (
 ) => {
   const transactions = await getRecentTransaction('user1@email.com')
   const balance = await getBalance('user1@email.com')
-  console.log(balance)
   return {
     // Transaction 타입 중 date: Date 때문에 stringify & parse
     props: { transactions: JSON.parse(JSON.stringify(transactions)) },

@@ -13,10 +13,12 @@ export default function handler(
   res.status(200).json({ name: 'John Doe' })
 }
 
-// export default async function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse<Data>,
-// ) {
-//   const session = await getServerSession(req, res, authOptions)
-//   res.status(200).json({ name: 'John Doe' })
-// }
+/*
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse<Data>,
+) {
+  const session = await getServerSession(req, res, authOptions)
+  res.status(200).json({ name: 'John Doe' })
+}
+*/

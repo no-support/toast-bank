@@ -34,13 +34,16 @@ const CardDetailPage = ({ initialCard }: CardDetailPageProps) => {
     promotionTerms,
     payback,
   } = data
+
   const subTitle =
     promotionTitle != null ? removeHtmlTags(promotionTitle) : tags.join(',')
+
+  const title = `토스트뱅크 | ${name}`
 
   return (
     <>
       <Head>
-        <title>토스트뱅크 | {name}</title>
+        <title>{title}</title>
         <meta property="og:title" content="토스트뱅크" />
         <meta
           property="og:description"

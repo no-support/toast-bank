@@ -31,6 +31,12 @@ const CreditPage = ({ score = 0 }: CreditPageProps) => {
     <>
       <Head>
         <title>토스트뱅크 | 신용 점수 확인</title>
+        <meta property="og:title" content="토스트뱅크" />
+        <meta
+          property="og:description"
+          content="완전히 새로운 은행을 만나보세요"
+        />
+        <meta property="og:image" content="/thumbnail.png" />
       </Head>
       <div className="p-3">
         <div className="gauge-section flex flex-col items-center mb-8">
