@@ -6,6 +6,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<Faq[]>,
 ) {
-  const faqs = await prisma.faq.findMany()
+  const faqs: Faq[] = await prisma.faq.findMany()
   res.status(200).json(faqs)
 }

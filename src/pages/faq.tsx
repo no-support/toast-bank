@@ -1,6 +1,6 @@
 import { Faq } from '@/interface/faq'
+import prisma from '@/lib/db'
 import { oneDay } from '@/utils/constant'
-import axios from 'axios'
 
 const FaqPage = ({ faqs }: { faqs: Faq[] }) => {
   return (
@@ -36,9 +36,9 @@ const FaqPage = ({ faqs }: { faqs: Faq[] }) => {
 }
 
 export async function getStaticProps() {
-  const faqs = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/faq`)
+  const faqs: Faq[] = await prisma.faq.findMany()
   return {
-    props: { faqs: faqs.data },
+    props: { faqs: faqs },
     revalidate: oneDay,
   }
 }

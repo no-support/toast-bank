@@ -1,6 +1,6 @@
 ## URL
 
-**https://toast-bank.vercel.app**
+**https://toast-bank-k5qkqgek0-no-supports-projects.vercel.app**
 (샘플 계정: user1@email.com // 87654321)
 
 ## 아키텍처
@@ -40,4 +40,4 @@
 - skeleton ui 적용
 - error boundary 적용
 - 테스트 코드 작성
-- CSS 개선
+- 테마 변경 새로고침 시 flicker 현상 수정
