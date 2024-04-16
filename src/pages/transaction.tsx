@@ -103,6 +103,7 @@ const AccountPage = () => {
                 setPageParam((state) => state - 1)
               }}
               disabled={pageParam === 1}
+              className={pageParam === 1 ? 'opacity-50 cursor-not-allowed' : ''}
             >
               이전 페이지
             </button>
@@ -112,6 +113,11 @@ const AccountPage = () => {
                 setPageParam((state) => state + 1)
               }}
               disabled={transaction_list?.nextPage == null}
+              className={
+                transaction_list?.nextPage == null
+                  ? 'opacity-50 cursor-not-allowed'
+                  : ''
+              }
             >
               다음 페이지
             </button>
