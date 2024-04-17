@@ -1,6 +1,6 @@
 ## URL
 
-**https://toast-bank-k5qkqgek0-no-supports-projects.vercel.app**
+**toast-bank.vercel.app**
 (샘플 계정: user1@email.com // 87654321)
 
 ## 아키텍처
@@ -30,11 +30,11 @@
 ### patch log
 
 - forEach, map은 비동기 순서를 보장하지 않아, db seeding 작업 시 for of문 사용(2024.04.11.)
+- 로그인된 상태에서 Navbar 회원가입/로그인 버튼이 빠르게 보였다 사라지는 이슈 해결(2024.04.17.)
+- 배포 환경에서 로그인, 로그아웃 기능이 해당 버튼을 두 번씩 눌러야 작동하는 이슈 해결 (참고: [next-auth csrf 이슈](https://github.com/nextauthjs/next-auth/issues/2426))
 
 ### todo
 
-- 로그인된 상태에서 Navbar 회원가입/로그인 버튼이 빠르게 보였다 사라지는 이슈
-- 배포 환경에서 로그아웃이 작동하지 않는 이슈
 - 반복 사용되고 있는 ui 컴포넌트화
 - tree-shaking 및 코드 정리로 번들 크기 개선
 - Lazy Loading 적용

@@ -1,18 +1,20 @@
-import { GetServerSidePropsContext, InferGetServerSidePropsType } from 'next'
-import { getCsrfToken, signIn, useSession } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { toast } from 'react-toastify'
 
-const SignInPage = ({
-  csrfToken,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const router = useRouter()
+type Inputs = {
+  email: string
+  password: string
+}
 
-  const { status } = useSession()
-  if (status === 'authenticated') {
+const SignInPage = () => {
+  const router = useRouter()
+  const session = useSession()
+
+  if (session.status === 'authenticated') {
     router.push('/')
   }
 
@@ -23,7 +25,12 @@ const SignInPage = ({
   } = useForm<Inputs>()
   const onSubmit: SubmitHandler<Inputs> = async (formData) => {
     try {
-      const res = await signIn('credentials', { ...formData, redirect: false })
+      const res = await signIn('credentials', {
+        ...formData,
+        redirect: false,
+        callbackUrl: '/',
+      })
+      await session.update()
       if (res?.error) throw new Error(res.error)
     } catch (e) {
       toast.error('이메일과 비밀번호를 확인해주세요.')
@@ -43,7 +50,6 @@ const SignInPage = ({
       </Head>
       <div className="flex flex-col p-6">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
           {/* 이메일 */}
           <div className="flex flex-col">
             <label htmlFor="email" className="text-sm mb-1.5 text-text">
@@ -94,16 +100,5 @@ const SignInPage = ({
     </>
   )
 }
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  return {
-    props: {
-      csrfToken: await getCsrfToken(context),
-    },
-  }
-}
-export default SignInPage
 
-type Inputs = {
-  email: string
-  password: string
-}
+export default SignInPage

@@ -1,4 +1,3 @@
-'use client'
 import { toggleThemeColor } from '@/store/themeSlice'
 import { signOut, useSession } from 'next-auth/react'
 import Link from 'next/link'
@@ -41,7 +40,7 @@ const Navbar = () => {
           />
         )}
 
-        {status === 'authenticated' ? (
+        {status === 'loading' ? null : status === 'authenticated' ? (
           <button
             onClick={() => {
               signOut()
